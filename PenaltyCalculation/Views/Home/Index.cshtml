@@ -1,0 +1,40 @@
+﻿@model PenaltyCalculation.Input.PenaltyInputModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+<form asp-action="Index" method="post" class="form-horizontal" role="form" >
+    <div style="float:inherit">
+        <div class="col-3">
+            <input class="form-control" type="date" asp-format="{0:dd'/MM'/'yyyy'}" name="CheckOutDate" value="@ViewBag.Today" />
+
+        </div>
+        <div>
+            <div class="col-3">
+                <input class="form-control" type="date" asp-format="{0:dd'/MM'/'yyyy'}" name="CheckInDate" value="@ViewBag.Today" />
+            </div>
+        </div>
+        <div>
+            <div class="col-3">
+                <select name="Country.Id" asp-for="Country.Id" asp-items="@(new SelectList(ViewBag.CoutriesList,"Text","Value"))"></select>
+            </div>
+        </div>
+        <div>
+            <div class="col-3">
+                <input type="submit" value="Calculate" />
+            </div>
+        </div>
+    </div>
+
+</form>
+@if (ViewBag.Result)
+{
+    <div>
+        <p>Business Day : </p> <span>@ViewBag.BusinessDays</span>
+        <p>Penalty Price : </p> <span>@ViewBag.Penalty</span>
+    </div>
+}
